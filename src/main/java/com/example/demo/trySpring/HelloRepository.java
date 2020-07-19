@@ -17,7 +17,8 @@ public class HelloRepository {
 
 	public Map<String, Object> findOne(int id){
 		// Springが用意しているJdbc接続用のクラス(JdbcTemplate)を使って、SELECT分を実行している
-		String query = "SELECT"+"employee_id,"+"employee_name,"+"age"+"FROM employee"+"WHERE employee_id=?";
+		// SyntaxErrorが発生するためスペースやカンマを入れることを気をつける
+		String query = "SELECT " + "employee_id," + "employee_name," + "age " + "FROM employee " + "WHERE employee_id=?";
 		// 検索実行
 		Map<String, Object> employee = jdbcTemplate.queryForMap(query, id);
 		return employee;

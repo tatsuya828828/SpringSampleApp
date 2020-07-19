@@ -48,6 +48,6 @@ public class HelloController {
 		model.addAttribute("name", employee.getEmployeeName());
 		model.addAttribute("age", employee.getAge());
 		// helloResponsiveDB.htmlに画面遷移
-		return "helloResponseDB";
+		return "HelloResponseDB";
 	}
 }
