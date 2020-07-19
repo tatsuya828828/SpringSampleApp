@@ -20,9 +20,9 @@ public class HelloController {
 		return "hello";
 	}
 	//	@GetMappingアノテーションと同じようにメソッドに、@PostMappingアノテーションをつけることでPOSTメソッドで送られてきた場合の処理ができる
-	@PostMapping("/hello")
 	// メソッドの引数に@RequestParamアノテーションをつけることで、画面からの入力内容を受け取ることができる
 	// アノテーションの引数にはhtmlのname属性の値を指定する
+	@PostMapping("/hello")
 	public String postRequest(@RequestParam("text1")String str, Model model) {
 		// model.attAttributeにキーと値をセットしておくことで画面から指定したキーの値を受け取ることができる
 		model.addAttribute("sample", str);
