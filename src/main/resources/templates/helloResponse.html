@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http//www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>ResponseSample</title>
+	</head>
+	<body>
+		<h1>HelloResponse</h1>
+		<!-- th:text促成に、model.addAttributeで登録したキー(sample)を指定することで、コントローラークラスからの値を受け取ることができる
+			キーを指定する際には${}でかこむ -->
+		<p th:text="${sample}"></p>
+	</body>
+</html>
