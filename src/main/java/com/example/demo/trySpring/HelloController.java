@@ -143,8 +143,6 @@ public class HelloController {
 	二つ目はスコープの違いである
 	例えば、singletonスコープのインスタンスが、prototypeスコープのオブジェクトを持っている場合などである
 	このようなことをしてしまうと、prototypeスコープを設定したBeanがsingletonスコープになってしまう
+
 	スコープが異なるBeanをフィールドとして持つ場合は注意が必要である
-
-
-
 */
