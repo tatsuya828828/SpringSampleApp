@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<!-- Bootstrapの設定
+			Bootstrapのファイルの読み込みをheadタグ内で行っている
+			タイムリーフで/resouces配下のファイルを読み込むには以下の属性を使う
+			cssファイル
+			th:href="@{resources 配下からのファイルパス}"
+			jsファイル
+			th:src="@{resources 配下からのファイルパス}"
+			なお、Bootstrapのファイル内でjQueryを使用しているため
+			jQueryのjsファイルを先に読み込んだ後にBootstrapのjsファイルを読み込魔なければならない-->
+		<link th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}" rel="stylesheet">
+		<script th:src="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>
+		<script th:src="@{webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+		<title>Login</title>
+	</head>
+	<body class="text-center">
+		<h1>Login</h1>
+		<form method="post" action="/login">
+			<!-- ユーザーID -->
+			<label>ユーザーID</label>
+			<input type="text">
+			<br><br>
+			<!-- パスワード -->
+			<input type="password">
+			<br><br>
+			<!-- ログインボタン -->
+			<button class="btn btn-primary" type="submit">ログイン</button>
+		</form>
+		<br>
+		<!-- ユーザー登録画面へのリンク -->
+		<!-- タイムリーフを使ってアンカータグを使う場合、th:href属性を使用する
+			使い方は、コントローラークラスの@GetMappingアノテーションのカッコ内の文字列を指定するだけ
+			指定する際には、@{'/xxx'}という形式で遷移先を指定する
+			ちなみにアンカータグなので、HTTPリクエストはGETメソッドで送信される -->
+		<a th:href="@{'/signup'}">ユーザーの新規登録はこちら</a>
+	</body>
+</html>
