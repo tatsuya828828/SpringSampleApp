@@ -12,6 +12,7 @@ public class LoginController {
 	public String getLogin(Model model) {
 		// login.htmlに画面遷移
 		// login/loginというのは、loginフォルダ配下のlogin.htmlを指定している
+		// htmlファイルは、src/main/resources/templatesからのパスで指定する
 		return "login/login";
 	}
 
