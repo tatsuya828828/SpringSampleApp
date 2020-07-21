@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,6 +35,7 @@ public class SignupController {
 
 	// ユーザー登録画面のGET用コントローラー
 	@GetMapping("/signup")
+
 	public String getSignUp(@ModelAttribute SignupForm form, Model model) {
 		// ラジオボタンの初期化メソッド呼び出し
 		radioMarriage = initRadioMarriage();
@@ -60,7 +62,9 @@ public class SignupController {
 
 	// ユーザー登録画面のPOST用コントローラー
 	@PostMapping("/signup")
-	public String postSignUp(@ModelAttribute SignupForm form, BindingResult bindingResult, Model model) {
+	// バリデーションを実施するには、引数のフォームクラスに@Validatedアノテーションをつける
+	// また、バリデーションのチェック結果はBindingResultクラスに入っている
+	public String postSignUp(@ModelAttribute @Validated SignupForm form, BindingResult bindingResult, Model model) {
 		// 入力チェックに引っかかった場合、ユーザー登録画面に戻る
 		if(bindingResult.hasErrors()) {
 			// GETリクエスト用のメソッドを呼び出して、ユーザー登録画面に戻る
@@ -74,4 +78,10 @@ public class SignupController {
 		// 今回は、/loginにGETメソッドでHTTPリクエストが送られる。そして、LoginControllerのgetLoginメソッドが呼び出される
 		return "redirect:/login";
 	}
+
+	/*
+	 * Springでバリデーションをする際には@Validatedアノテーションを使う、ただし、@Validというアノテーションをつけても同じようにバリデーションを実施する
+	 * @ValidはJ2EEから標準で搭載されているBeanValidator(バリデーション用のアノテーション)である
+	 * メッセージ用のプロパティファイル名やエラーメッセージの書き方が@Validatedと比べて少し変わる。
+	 */
 }
