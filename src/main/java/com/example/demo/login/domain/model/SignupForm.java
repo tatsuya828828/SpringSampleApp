@@ -3,13 +3,12 @@ import java.util.Date;
 
 import javax.validation.constraints.AssertFalse;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.Range;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Data;
@@ -36,8 +35,7 @@ public class SignupForm {
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	private Date birthday; // 誕生日
 	// 値が0から100まで
-	@Min(0)
-	@Max(100)
+	@Range(min=0, max=100)
 	private int age; // 年齢
 	// falseのみ可能
 	@AssertFalse
@@ -47,3 +45,23 @@ public class SignupForm {
 // @NumberFormatアノテーションは、指定されたフォーマットの文字列を数値型に変換する
 // @NumberFormat(pattern = "#,###")
 // String salary;						のように記述する
+
+/* バリデーション用のアノテーションは
+	javax.validation
+@NotNull: nullでないことをチェック
+@NotEmpty: 文字列やCollectionがnullまたはからでないことをチェック
+@NotBlank: 文字列がnull、からもじ、空白スペースのみでないことをチェック
+@Max: 指定した値以下であるかをチェック
+@Min: 指定した値以上であるかをチェック
+@Size: 文字列の長さやCollectionのsizeが、指定した範囲内にあるかどうかをチェック
+@AssertTrue: trueかどうかチェック
+@AssertFale: falseかどうかチェック
+@Pattern: 指定した正規表現に一致するかどうかをチェック
+@Email: 文字列がメールアドレス形式かどうかをチェック
+	hibernate.validator
+@Range: 数値が指定した範囲内にあるかをチェック
+@Length: 文字列の長さが指定した範囲内であるかをチェック
+@CreditCardNumber: 文字列がクレジットカード番号形式かどうかをチェック
+@URL: 文字列がURL形式かどうかをチェック
+*/
+
