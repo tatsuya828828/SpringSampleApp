@@ -15,15 +15,25 @@
 			<!-- ログイン画面では、formタグ内にaction="/login"といった形でリクエスト先のURLを指定していたが、それは通常のhtmlの書き方である
 				一方で、ユーザー登録画面のhtmlではth:action属性でリクエスト先のURLを指定している、これはタイムリーフを使った書き方
 				Springセキュリティを使わない場合は、通常の書き方で問題ないが、Springセキュリティを使う場合は、
-				formタグ内にはth:action属性を使うようにする -->
-			<form method="post" th:action="@{/signup}">
+				formタグ内にはth:action属性を使うようにする
+
+				th:object属性を使うことで、Modelに登録されているオブジェクトを受け取ることができる
+				今回の場合で言うと、SignupFormクラスを受け取っている
+				th:object="${ModelAttributeのキー名}"のように記述する
+				th:objectをつけたタグの中であれば、th:fieldでそのオブジェクト名を省略することができる -->
+
+			<form method="post" th:action="@{/signup}" th:object="${signupForm}">
 				<table class="table table-bordered table-hover">
 					<!-- ユーザーIDの入力エリア -->
 					<tr>
 						<th class="active col-sm-3">ユーザーID</th>
 						<td>
 							<div class="form-group">
-								<input type="text" class="form-control">
+								<!-- th:field属性を使用するとオブジェクトの中のフィールドを取得できる。
+								同時に、コントローラークラスに値を渡すこともできる。
+								th:field="*{フィールド名}"のように記述する、もしth:object属性を書かなかった場合は
+								th:field="*{ModelAttributeのキー名.フィールド名}"と記述する -->
+								<input type="text" class="form-control" th:field="*{userId}">
 							</div>
 						</td>
 					</tr>
@@ -32,7 +42,7 @@
 						<th class="active">パスワード</th>
 						<td>
 							<div class="form-group">
-								<input type="text" class="form-control">
+								<input type="text" class="form-control" th:field="*{password}">
 							</div>
 						</td>
 					</tr>
@@ -41,7 +51,7 @@
 						<th class="active">ユーザー名</th>
 						<td>
 							<div class="form-group">
-								<input type="text" class="form-control">
+								<input type="text" class="form-control" th:field="*{userName}">
 							</div>
 						</td>
 					</tr>
@@ -50,7 +60,7 @@
 						<th class="active">誕生日</th>
 						<td>
 							<div class="form-group">
-								<input type="text" class="form-control" placeholder="yyyy/MM/dd">
+								<input type="text" class="form-control" placeholder="yyyy/MM/dd" th:field="*{birthday}">
 							</div>
 						</td>
 					</tr>
@@ -59,7 +69,7 @@
 						<th class="active">年齢</th>
 						<td>
 							<div class="form-group">
-								<input type="text" class="form-control">
+								<input type="text" class="form-control" th:field="*{age}">
 							</div>
 						</td>
 					</tr>
@@ -76,12 +86,19 @@
 									<!-- 上のth:each属性で定義した変数itemを使っている、中身はsignupcontrollerクラスで取得したMapが入っている
 										th:textには、画面に表示される文字列を指定する、今回はMapクラスのkey(既婚,未婚)の値を画面に表示している
 										th:valueには、画面からControllerクラスに送る値を指定する、今回はMapクラスのvalue(true,false)のあたいを送る -->
-									<input type="radio" name="radioMarrige" th:text="${item.key}" th:value="${item.value}">
+									<input type="radio" name="radioMarrige" th:text="${item.key}" th:value="${item.value}" th:field="*{marriage}">
 								</div>
 							</div>
 						</td>
 					</tr>
 				</table>
+				<!-- エラーメッセージの表示
+					もし、エラーメッセージをまとめて一覧表示するためには、ラジオボタンと同様にth:each属性を使う -->
+				<ul>
+					<li th:each="error:${#fields.detailedErrors()}">
+						<span th:text="${error.message}">Error message</span>
+					</li>
+				</ul>
 				<!-- ユーザー登録ボタン -->
 				<button class="btn btn-primary" type="submit">ユーザー登録</button>
 			</form>
