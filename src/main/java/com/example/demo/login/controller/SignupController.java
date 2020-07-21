@@ -5,8 +5,12 @@ import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import com.example.demo.login.domain.model.SignupForm;
 
 @Controller
 public class SignupController {
@@ -30,7 +34,7 @@ public class SignupController {
 
 	// ユーザー登録画面のGET用コントローラー
 	@GetMapping("/signup")
-	public String getSignUp(Model model) {
+	public String getSignUp(@ModelAttribute SignupForm form, Model model) {
 		// ラジオボタンの初期化メソッド呼び出し
 		radioMarriage = initRadioMarriage();
 		// ラジオボタン用のMapをModelに登録
@@ -40,9 +44,30 @@ public class SignupController {
 		return "login/signup";
 	}
 
+
+	// 引数のフォームクラスに@ModelAttributeアノテーションをつけると、自動でModelクラスに登録(addAtribute)してくれる
+	// なお、@ModelAttributeをつけた場合、デフォルトではクラス名の最初の文字を小文字に変えた文字列が、キー名に登録される
+	// 今回の場合だと、signupFormというキー名で登録されている、もしキー名を変えたい場合は
+	// @ModelAttribute("キー名")と、パラメータを指定する
+
+	// データバインド結果を受け取るためには、メソッドの引数にBindingResultクラスを追加する
+	// このクラスのhasErrorsメソッドで、データバインドに失敗しているかどうかがわかる
+	// また、バリデーションでエラーが発生した場合もこのhasErrorsメソッドで失敗しているかどうかわかる
+
+	// データバインドに失敗した場合、BindingResultのhasErrorsメソッドでfalseが返ってくる
+	// 今回はデータバインドに失敗した場合、ユーザー登録画面に戻る。
+	// その際には、getSignUpメソッドを呼び出している。理由としては、ラジオボタンの変数を初期化してくれるから
+
 	// ユーザー登録画面のPOST用コントローラー
 	@PostMapping("/signup")
-	public String postSignUp(Model model) {
+	public String postSignUp(@ModelAttribute SignupForm form, BindingResult bindingResult, Model model) {
+		// 入力チェックに引っかかった場合、ユーザー登録画面に戻る
+		if(bindingResult.hasErrors()) {
+			// GETリクエスト用のメソッドを呼び出して、ユーザー登録画面に戻る
+			return getSignUp(form, model);
+		}
+		// formの中身をコンソールに出して確認する
+		System.out.println(form);
 		// login.htmlにリダイレクト
 		// リダイレクトする場合は、メソッドの戻り値にredirect:遷移先パスと指定する
 		// リダイレクトすると遷移先のControllerクラスのメソッドが呼ばれる
