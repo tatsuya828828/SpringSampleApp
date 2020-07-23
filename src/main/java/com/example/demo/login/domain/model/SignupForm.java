@@ -2,12 +2,12 @@ package com.example.demo.login.domain.model;
 import java.util.Date;
 
 import javax.validation.constraints.AssertFalse;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -31,8 +31,9 @@ public class SignupForm {
 	// @DateTimeFormatアノテーションをフィールドにつけることで、画面から渡されてきた文字列を日付方に変換してくれる
 	// なお、pattern属性にどのようなフォーマットでデータが渡されてくるかを指定する
 	// 必須入力
-	@NotNull
+
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
+	@NotNull
 	private Date birthday; // 誕生日
 	// 値が0から100まで
 	@Range(min=0, max=100)
