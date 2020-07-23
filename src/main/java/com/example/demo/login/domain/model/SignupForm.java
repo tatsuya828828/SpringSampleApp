@@ -36,7 +36,7 @@ public class SignupForm {
 	@NotNull
 	private Date birthday; // 誕生日
 	// 値が0から100まで
-	@Range(min=0, max=100)
+	@Range(min=20, max=100)
 	private int age; // 年齢
 	// falseのみ可能
 	@AssertFalse
