@@ -17,6 +17,7 @@ import lombok.Data;
 @Data
 public class SignupForm {
 	// 入力必須、メールアドレス形式
+	// アノテーションのパラメータにgroups属性を追加してインタフェースのクラスを指定することで、フィールドとグループの紐付けができる
 	@NotBlank(groups = ValidGroup1.class)
 	@Email(groups = ValidGroup2.class)
 	private String userId; // ユーザーID
@@ -36,7 +37,7 @@ public class SignupForm {
 	@NotNull(groups = ValidGroup1.class)
 	private Date birthday; // 誕生日
 
-	@NotBlank(groups = ValidGroup1.class)
+	@NotNull(groups = ValidGroup1.class)
 	// 値が0から100まで
 	@Range(min=20, max=100, groups = ValidGroup2.class)
 	private int age; // 年齢
