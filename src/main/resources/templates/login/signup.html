@@ -82,6 +82,9 @@
 					<tr>
 						<th class="active">結婚ステータス</th>
 						<td>
+							<!-- th:classappend属性を使うことでCSSのクラスを追加することができる
+								今回の場合は、エラー時だけclass属性にhas-errorを追加している、has-errorはBootstrapのクラスでテキストボックスの枠を赤くしてくれる
+								th:classappendの値の部分でtrueかfalseかを判定している。trueの場合のみhas-errorというクラスを追加する -->
 							<div class="form-group" th:classappend="${#fields.hasErrors('marriage')}?'has-error'">
 								<!-- ラジオボタンを実装するにはth:each属性を使う、th:each属性は拡張for分のように使う
 									th:each="変数名:${ModelAttributeのキー名}"と指定する
