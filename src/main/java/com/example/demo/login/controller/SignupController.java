@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.example.demo.login.domain.model.GroupOrder;
 import com.example.demo.login.domain.model.SignupForm;
 
 @Controller
@@ -64,7 +65,9 @@ public class SignupController {
 	@PostMapping("/signup")
 	// バリデーションを実施するには、引数のフォームクラスに@Validatedアノテーションをつける
 	// また、バリデーションのチェック結果はBindingResultクラスに入っている
-	public String postSignUp(@ModelAttribute @Validated SignupForm form, BindingResult bindingResult, Model model) {
+	// @Validatedアノテーションのパラメーターに実行順序のインタフェースを指定する、そうすることで、バリデーションがグループ実行される
+	// なお、実行順序のインタフェースではなく、グループのインタフェースを直接指定することも可能
+	public String postSignUp(@ModelAttribute @Validated(GroupOrder.class) SignupForm form, BindingResult bindingResult, Model model) {
 		// 入力チェックに引っかかった場合、ユーザー登録画面に戻る
 		if(bindingResult.hasErrors()) {
 			// GETリクエスト用のメソッドを呼び出して、ユーザー登録画面に戻る

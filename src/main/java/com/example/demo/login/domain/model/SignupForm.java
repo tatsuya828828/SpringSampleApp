@@ -17,29 +17,31 @@ import lombok.Data;
 @Data
 public class SignupForm {
 	// 入力必須、メールアドレス形式
-	@NotBlank
-	@Email
+	@NotBlank(groups = ValidGroup1.class)
+	@Email(groups = ValidGroup2.class)
 	private String userId; // ユーザーID
 	// 必須入力、長さ4から100桁まで、半角英数字のみ
-	@NotBlank
-	@Length(min= 4, max=100)
-	@Pattern(regexp = "^[a-zA-Z0-9]+$")
+	@NotBlank(groups = ValidGroup1.class)
+	@Length(min= 4, max=100, groups = ValidGroup2.class)
+	@Pattern(regexp = "^[a-zA-Z0-9]+$", groups = ValidGroup3.class)
 	private String password; // パスワード
 	// 必須入力
-	@NotBlank
+	@NotBlank(groups = ValidGroup1.class)
 	private String userName; // ユーザー名
 	// @DateTimeFormatアノテーションをフィールドにつけることで、画面から渡されてきた文字列を日付方に変換してくれる
 	// なお、pattern属性にどのようなフォーマットでデータが渡されてくるかを指定する
 	// 必須入力
 
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
-	@NotNull
+	@NotNull(groups = ValidGroup1.class)
 	private Date birthday; // 誕生日
+
+	@NotBlank(groups = ValidGroup1.class)
 	// 値が0から100まで
-	@Range(min=20, max=100)
+	@Range(min=20, max=100, groups = ValidGroup2.class)
 	private int age; // 年齢
 	// falseのみ可能
-	@AssertFalse
+	@AssertFalse(groups = ValidGroup2.class)
 	private boolean marriage; // 結婚ステータス
 }
 // データバインド用のアノテーションは@DateTimeFormat以外には、@NumberFormatがある
