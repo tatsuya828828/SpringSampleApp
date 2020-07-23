@@ -28,12 +28,13 @@
 					<tr>
 						<th class="active col-sm-3">ユーザーID(メールアドレス)</th>
 						<td>
-							<div class="form-group">
+							<div class="form-group" th:classappend="${#fields.hasErrors('userId')}?'has-error'">
 								<!-- th:field属性を使用するとオブジェクトの中のフィールドを取得できる。
 								同時に、コントローラークラスに値を渡すこともできる。
 								th:field="*{フィールド名}"のように記述する、もしth:object属性を書かなかった場合は
 								th:field="*{ModelAttributeのキー名.フィールド名}"と記述する -->
 								<input type="text" class="form-control" th:field="*{userId}">
+								<span class="text-danger" th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}">userId error</span>
 							</div>
 						</td>
 					</tr>
@@ -41,8 +42,9 @@
 					<tr>
 						<th class="active">パスワード</th>
 						<td>
-							<div class="form-group">
+							<div class="form-group" th:classappend="${#fields.hasErrors('password')}?'has-error'">
 								<input type="text" class="form-control" th:field="*{password}">
+								<span class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">password error</span>
 							</div>
 						</td>
 					</tr>
@@ -50,8 +52,9 @@
 					<tr>
 						<th class="active">ユーザー名</th>
 						<td>
-							<div class="form-group">
+							<div class="form-group" th:classappend="${#fields.hasErrors('userName')}?'has-error'">
 								<input type="text" class="form-control" th:field="*{userName}">
+								<span class="text-danger" th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}">userName error</span>
 							</div>
 						</td>
 					</tr>
@@ -59,8 +62,9 @@
 					<tr>
 						<th class="active">誕生日</th>
 						<td>
-							<div class="form-group">
+							<div class="form-group" th:classappend="${#fields.hasErrors('birthday')}?'has-error'">
 								<input type="text" class="form-control" placeholder="yyyy/MM/dd" th:field="*{birthday}">
+								<span class="text-danger" th:if="${#fields.hasErrors('birthday')}" th:errors="*{birthday}">birthday error</span>
 							</div>
 						</td>
 					</tr>
@@ -68,8 +72,9 @@
 					<tr>
 						<th class="active">年齢</th>
 						<td>
-							<div class="form-group">
+							<div class="form-group" th:classappend="${#fields.hasErrors('age')}?'has-error'">
 								<input type="text" class="form-control" th:field="*{age}">
+								<span class="text-danger" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">age error</span>
 							</div>
 						</td>
 					</tr>
@@ -77,7 +82,7 @@
 					<tr>
 						<th class="active">結婚ステータス</th>
 						<td>
-							<div class="form-group">
+							<div class="form-group" th:classappend="${#fields.hasErrors('marriage')}?'has-error'">
 								<!-- ラジオボタンを実装するにはth:each属性を使う、th:each属性は拡張for分のように使う
 									th:each="変数名:${ModelAttributeのキー名}"と指定する
 									こうすることで、Modelに登録されている値が繰り返し呼び出される。また、th:eachがつけられたタグ内では
@@ -87,6 +92,7 @@
 										th:textには、画面に表示される文字列を指定する、今回はMapクラスのkey(既婚,未婚)の値を画面に表示している
 										th:valueには、画面からControllerクラスに送る値を指定する、今回はMapクラスのvalue(true,false)のあたいを送る -->
 									<input type="radio" name="radioMarrige" th:text="${item.key}" th:value="${item.value}" th:field="*{marriage}">
+									<span class="text-danger" th:if="${#fields.hasErrors('marriage')}" th:errors="*{marriage}">marriage error</span>
 								</div>
 							</div>
 						</td>
@@ -94,11 +100,11 @@
 				</table>
 				<!-- エラーメッセージの表示
 					もし、エラーメッセージをまとめて一覧表示するためには、ラジオボタンと同様にth:each属性を使う -->
-				<ul>
+				<!-- <ul>
 					<li th:each="error:${#fields.detailedErrors()}">
 						<span th:text="${error.message}">Error message</span>
 					</li>
-				</ul>
+				</ul -->
 				<!-- ユーザー登録ボタン -->
 				<button class="btn btn-primary" type="submit">ユーザー登録</button>
 			</form>
