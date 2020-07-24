@@ -26,7 +26,10 @@ public class LogAspect {
 	// だから、Aroundを使うと、メソッド実行の前後で任意の処理をすることができる。
 	// メソッドを調節実行しているためreturnには実行結果の戻り値を指定する。
 	// Around内でメソッドの実行を忘れると大変なので、注意すること
-
+	// @Aroundのパラメータを、
+	// @Around("bean(*Controller)")とすることでDIに登録されている、名前の最後にControllerと付くbean名をAOPの対象を指定できる
+	// @Around("@annotasion(org.springframework.web.bind.annotation.GetMapping)")とすることでアノテーションがついている全てのメソッドを対象とする
+	// @Around("@within(org.springframework.stereotype.Controller)")とすることで指定したアノテーションがついているクラスの全てのメソッドが対象となる
 	@Around("execution(* *..*.*Controller.*(..))")
 	public Object startLog(ProceedingJoinPoint jp)throws Throwable {
 		System.out.println("メソッド開始:"+ jp.getSignature());
