@@ -19,12 +19,12 @@ public class LogAspect {
 	// *: *を使用すると、任意の文字列を表す。」パッケージでは1階層のパッケージ名、メソッドの引数では、1つの引数になる
 	//..: ドットを2個続けると、パッケージの記述箇所では、任意(0以上)のパッケージになるメソッドの引数では、任意(0以上)の引数になる
 	// +: +をクラス名の後に指定すると、指定クラスのサブクラス/実装クラスが含まれる
-	@Before("execution(*com.example.demo.login.controller.LoginController.getLogin(..))")
+	@Before("execution( * com.example.demo.login.controller.LoginController.getLogin(..))")
 	public void startLog(JoinPoint jp) {
 		System.out.println("メソッド開始:"+ jp.getSignature());
 	}
 
-	@After("execution(*com.example.demo.login.controller.LoginController.getLogin(..))")
+	@After("execution( * com.example.demo.login.controller.LoginController.getLogin(..))")
 	public void exdLog(JoinPoint jp) {
 		System.out.println("メソッド終了:"+ jp.getSignature());
 	}
