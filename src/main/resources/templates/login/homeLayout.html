@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<link th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}" rel="stylesheet">
+		<script th:src="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>
+		<script th:src="@{webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+		<link th:href="@{/css/home.css}" rel="stylesheet">
+		<title>Home</title>
+	</head>
+	<body>
+		<!-- ヘッダー -->
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">SpringSample</a>
+				</div>
+				<form method="post" th:action="@{/logout}">
+					<button class="btn btn-link pull-right navbar-brand" type="submit">ログアウト</button>
+				</form>
+			</div>
+		</nav>
+		<!-- サイドバー -->
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-2 sidebar">
+					<ul class="nav nav-pills nav-stacked">
+						<li role="presentation">
+							<a th:href="@{'/userList'}">ユーザー管理</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- コンテンツ -->
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-10 col-sm-offset-2 main">
+					<!-- th:include属性は、テンプレート画面で必要となる
+						この属性がついているタグ内に別ファイルの内容、つまりコンテンツ部分のhtmlが追加される。
+						通常、th:includeの中の値は　th:include="ファイルパス::th:fragment属性の値"　のように指定する
+						ファイルパスというのは、コンテンツ部分のhtmlファイルのファイルパス
+						th:fragment属性は、コンテンツ部分のhtmlで使う属性である
+						ただし今回の場合は、コンテンツ部分を動的に変更する。
+						つまり、ホームが目nやユーザー一覧画面などのコンテンツ部分のhtmlを変える場合、プリプロセッシングを使う必要がある
+						プリプロセッシングとは、通常の式よりも先に評価させる仕組みのことである、これによりth:include="__${contents}__"の部分が
+						先に評価されるようになる。そのあとでhtmlが作成されるため、コンテンツ部分に対応したhtmlを表示させることが可能になる。
+						プリプロセッシングを使うには、変数(__${変数名}__)のように記述する。プリプロセッシングは他にもeach属性でよく使われる -->
+					<div th:include="__${contents}__"></div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
