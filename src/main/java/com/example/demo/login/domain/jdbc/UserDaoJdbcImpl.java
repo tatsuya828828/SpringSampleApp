@@ -1,6 +1,9 @@
 package com.example.demo.login.domain.jdbc;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -20,7 +23,12 @@ public class UserDaoJdbcImpl implements UserDao {
 	// Userテーブルの件数を取得
 	@Override
 	public int count() throws DataAccessException {
-		return 0;
+		// Objectの取得
+		// カウントの結果や、カラムを1つだけ取得してくるような場合には、queryForObjectメソッドを使う。
+		// 第1引数にSQL文、第2引数に戻り値のオブジェクトのclassを指定する
+		// 全権取得してカウント
+		int count = jdbc.queryForObject("SELECT COUNT(*) FROM m_user", Integer.class);
+		return count;
 	}
 
 	// Userテーブルにデータを1件insert
@@ -49,7 +57,32 @@ public class UserDaoJdbcImpl implements UserDao {
 	// Userテーブルの前データを取得
 	@Override
 	public List<User> selectMany() throws DataAccessException {
-		return null;
+		// 複数件のselect
+		// 複数件のselectをする場合は、queryForListメソッドを使う
+		// 戻り値の方にはList<Map<String, Object>>を指定する、Listが行を表していて、Mapが列を表している
+		// Mapのgetメソッドでテーブルのカラム名を指定することで値を取得できる
+		// 引数を追加すれば、PreparedStatementを使うこともできる
+		// M_USERテーブルのデータを全権取得
+		List<Map<String, Object>> getList = jdbc.queryForList("SELECT * FROM m_user");
+		// 結果返却用の変数
+		List<User> userList = new ArrayList<>();
+		// 取得したデータを結果返却用のListに格納していく
+		for(Map<String, Object> map: getList) {
+			// Userインスタンスの生成
+			User user = new User();
+			// Userインスタンスに取得したデータをセットする
+			user.setUserId((String)map.get("user_id"));
+			user.setPassword((String)map.get("password"));
+			user.setUserName((String)map.get("user_name"));
+			user.setBirthday((Date)map.get("birthday"));
+			user.setAge((Integer)map.get("age"));
+			user.setMarriage((Boolean)map.get("marriage"));
+			user.setRole((String)map.get("role"));
+
+			// 結果返却用のListに追加
+			userList.add(user);
+		}
+		return userList;
 	}
 
 	// Userテーブルを1件更新
