@@ -34,7 +34,7 @@ public class UserDaoJdbcImpl implements UserDao {
 		// 1件登録
 		int rowNumber = jdbc.update(
 				"INSERT INTO m_user(user_id, "+"password, "+"user_name, "
-				+"birthday, "+"age, "+"marriage, "+"role,)"+"VALUES(?,?,?,?,?,?,?)",
+				+"birthday, "+"age, "+"marriage, "+"role)"+"VALUES(?,?,?,?,?,?,?)",
 				user.getUserId(), user.getPassword(), user.getUserName(), user.getBirthday(),
 				user.getAge(), user.isMarriage(), user.getRole());
 		return rowNumber;
