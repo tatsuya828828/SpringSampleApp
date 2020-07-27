@@ -34,6 +34,9 @@
 								th:field="*{フィールド名}"のように記述する、もしth:object属性を書かなかった場合は
 								th:field="*{ModelAttributeのキー名.フィールド名}"と記述する -->
 								<input type="text" class="form-control" th:field="*{userId}">
+								<!-- 個別エラーメッセージの表示にはth:if属性を使用する、th:if属性には条件式を設定する
+									th:if属性はでは、フィールドのバリデーションでエラーがあるとtrueを返している
+									そして、th:errors属性で各フィールドのエラーメッセージ を表示するというコードになっている -->
 								<span class="text-danger" th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}">userId error</span>
 							</div>
 						</td>
