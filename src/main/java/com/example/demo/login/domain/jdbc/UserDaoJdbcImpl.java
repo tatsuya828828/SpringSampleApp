@@ -56,7 +56,7 @@ public class UserDaoJdbcImpl implements UserDao {
 	// 複数件取得する場合と、使い方はほとんど一緒
 	@Override
 	public User selectOne(String userId) throws DataAccessException {
-		Map<String, Object> map = jdbc.queryForMap("SELECT * FROM m_user"+"WHERE user_id = ?", userId);
+		Map<String, Object> map = jdbc.queryForMap("SELECT * FROM m_user"+" WHERE user_id = ?", userId);
 		// 結果返却用の変数
 		User user = new User();
 		// 取得したデータを結果返却用の変数にセットしていく
