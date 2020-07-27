@@ -38,4 +38,9 @@ public class UserService {
 		// 全権取得
 		return dao.selectMany();
 	}
+
+	public User selectOne(String userId) {
+		// selectOne実行
+		return dao.selectOne(userId);
+	}
 }
