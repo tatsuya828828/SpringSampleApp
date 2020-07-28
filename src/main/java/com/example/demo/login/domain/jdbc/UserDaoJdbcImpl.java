@@ -35,7 +35,7 @@ public class UserDaoJdbcImpl implements UserDao {
 	@Override
 	public int insertOne(User user) throws DataAccessException {
 		// JdbcTemplateを使って登録(insert)するには、updateメソッドを使う
-		// updataeメソッドは更新、削除にも使う。使い方は、第1引数にSQL文を入れる
+		// updataメソッドは更新、削除にも使う。使い方は、第1引数にSQL文を入れる
 		// 第2引数以降には、PreparedStatementを使う
 		// PreparedStatementには、SQL文の?の部分に入れる変数を引数にセットしていく
 		// 引数にセットした順番にSQL文に代入されていく、なお、updateメソッドの戻り値には、登録したレコード数が返ってくる
@@ -108,7 +108,7 @@ public class UserDaoJdbcImpl implements UserDao {
 		// jdbcTemplateのupdateメソッドを使用する
 		// SQL文と、PreparedStatementの値を引数に渡していく
 		int rowNumber = jdbc.update(
-				"UPDATE M_USER"+" SET"+" password=?, "+"user_name=?, "+"birthday=?, "+"age=?, "+"marriage=?, "+"WHERE user_id=?",
+				"UPDATE M_USER"+" SET"+" password = ?, "+"user_name = ?, "+"birthday = ?, "+"age = ?, "+"marriage = ?, "+"WHERE user_id = ?",
 				user.getPassword(), user.getUserName(), user.getBirthday(), user.getAge(), user.isMarriage(), user.getUserId());
 		return rowNumber;
 	}
