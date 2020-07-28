@@ -38,9 +38,21 @@ public class UserService {
 		// 全権取得
 		return dao.selectMany();
 	}
-
+	// 1件取得メソッド
 	public User selectOne(String userId) {
 		// selectOne実行
 		return dao.selectOne(userId);
+	}
+	// 1件更新メソッド
+	public boolean updateOne(User user) {
+		// 1件更新
+		int rowNumber =dao.updateOne(user);
+		// 判定用変数
+		boolean result = false;
+		if(rowNumber>0) {
+			// update成功
+			result = true;
+		}
+		return result;
 	}
 }
