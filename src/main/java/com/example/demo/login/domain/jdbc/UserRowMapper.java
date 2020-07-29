@@ -8,6 +8,11 @@ import org.springframework.jdbc.core.RowMapper;
 import com.example.demo.login.domain.model.User;
 
 // RowMapper
+// RowMapperを使用するには、RowMapper<?>インターフェースを継承する
+// ?の部分には、マッピングに使うJavaオブジェクトのクラスを使用する
+// RowMapperを継承して、mapRowメソッドをOverrideする、引数のResultSetにはSelect結果が入っている
+// そのため、ResultSetの値をUserクラスにセットする、最後にUserクラスのインスタンスをreturnすれば、RowMapperが完成する
+// このように、RowMapperでは、Select結果とUserクラスをあらかじめマッピングしておくことができる
 public class UserRowMapper implements RowMapper<User> {
 	@Override
 	public User mapRow(ResultSet rs, int rowNum) throws SQLException {
