@@ -108,7 +108,7 @@ public class UserDaoJdbcImpl implements UserDao {
 		// jdbcTemplateのupdateメソッドを使用する
 		// SQL文と、PreparedStatementの値を引数に渡していく
 		int rowNumber = jdbc.update(
-				"UPDATE M_USER"+" SET"+" password = ?, "+"user_name = ?, "+"birthday = ?, "+"age = ?, "+"marriage = ?, "+"WHERE user_id = ?",
+				"UPDATE m_user"+" SET"+" password = ?, "+"user_name = ?, "+"birthday = ?, "+"age = ?, "+"marriage = ?, "+"WHERE user_id = ?",
 				user.getPassword(), user.getUserName(), user.getBirthday(), user.getAge(), user.isMarriage(), user.getUserId());
 		return rowNumber;
 	}
@@ -116,7 +116,8 @@ public class UserDaoJdbcImpl implements UserDao {
 	// Userテーブルを1件削除
 	@Override
 	public int deleteOne(String userId) throws DataAccessException {
-		return 0;
+		int rowNumber = jdbc.update("DELETE FROM m_user WHERE user_id = ?", userId);
+		return rowNumber;
 	}
 
 	// Userテーブルの前データをCSVに出力する
