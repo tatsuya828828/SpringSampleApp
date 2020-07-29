@@ -12,7 +12,7 @@ import com.example.demo.login.domain.repository.UserDao;
 @Service
 public class UserService {
 	@Autowired
-	@Qualifier("UserDaoJdbcImpl2")
+	@Qualifier("UserDaoJdbcImpl3")
 	/* @Autowiredと一緒に@Qualifierアノテーションを使用すると、どのBeanを使用するか指定することができる
 	 * UserDaoインターフェースを継承したクラスが1つだけであればSpringが自動的にBeanを探してくれるため、@Qualifierはつける必要がない
 	 * ただし、今回のようにインターフェースを継承したクラスが2つある場合は、@Qualifierをつけなければならない
