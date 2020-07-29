@@ -13,7 +13,9 @@ import org.springframework.stereotype.Repository;
 import com.example.demo.login.domain.model.User;
 import com.example.demo.login.domain.repository.UserDao;
 
-@Repository
+// @Repositoryアノテーションに引数を追加
+// 引数には、Bean名をセットしている、Bean名をセットすることで、@Autowiredする際に、どのクラスを使用するか指定できる
+@Repository("UserDaoJdbcImpl")
 public class UserDaoJdbcImpl implements UserDao {
 	// JdbcTemplateはSpringが用意しているため、すでにBean定義がされている。
 	// そのため、@Autowiredするだけで使えるようになる、このクラスのメソッドを使って、SQLを実行していく
@@ -108,7 +110,7 @@ public class UserDaoJdbcImpl implements UserDao {
 		// jdbcTemplateのupdateメソッドを使用する
 		// SQL文と、PreparedStatementの値を引数に渡していく
 		int rowNumber = jdbc.update(
-				"UPDATE m_user"+" SET"+" password = ?, "+"user_name = ?, "+"birthday = ?, "+"age = ?, "+"marriage = ?, "+"WHERE user_id = ?",
+				"UPDATE m_user"+" SET"+" password=?,"+" user_name=?,"+" birthday=?,"+" age=?,"+" marriage=?,"+" WHERE user_id=?",
 				user.getPassword(), user.getUserName(), user.getBirthday(), user.getAge(), user.isMarriage(), user.getUserId());
 		return rowNumber;
 	}

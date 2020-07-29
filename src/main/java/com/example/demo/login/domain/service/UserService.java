@@ -3,6 +3,7 @@ package com.example.demo.login.domain.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.login.domain.model.User;
@@ -11,6 +12,12 @@ import com.example.demo.login.domain.repository.UserDao;
 @Service
 public class UserService {
 	@Autowired
+	@Qualifier("UserDaoJdbcImpl2")
+	/* @Autowiredと一緒に@Qualifierアノテーションを使用すると、どのBeanを使用するか指定することができる
+	 * UserDaoインターフェースを継承したクラスが1つだけであればSpringが自動的にBeanを探してくれるため、@Qualifierはつける必要がない
+	 * ただし、今回のようにインターフェースを継承したクラスが2つある場合は、@Qualifierをつけなければならない
+	 * Springではインタフェースを作り、それを継承したクラスを作るというのが一般的な使い方になるため、@Qualifierは覚えておいた方が良い
+	 */
 	UserDao dao;
 
 	// Serviceクラスのinsertメソッドでは、リポジトリークラスのinsertOneメソッドを呼び出している
