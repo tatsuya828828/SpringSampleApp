@@ -30,7 +30,7 @@ public class UserRowCallbackHandler implements RowCallbackHandler {
 			// 取得件数分loop
 			do {
 				// ResultSetから値を取得してStringにセット
-				String str = rs.getNString("user_id") +","
+				String str = rs.getString("user_id") +","
 						+ rs.getString("password") +","+ rs.getString("user_name") +","+ rs.getDate("birthday") +","
 						+ rs.getInt("age") +","+ rs.getBoolean("marriage") +","+ rs.getString("role");
 				// ファイルに書き込み&改行

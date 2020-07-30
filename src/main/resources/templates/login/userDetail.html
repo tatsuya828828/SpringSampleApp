@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://thymeleaf.org">
+<html xmlns:th="http://thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 	<head>
 		<meta charset="UTF-8">
 	</head>
@@ -10,7 +10,7 @@
 					<div class="page-header">
 						<h1>ユーザー詳細</h1>
 					</div>
-					<form method="post" th:action="@{/userDetail}" th:object="${signupForm}">
+					<form method="post" th:action="@{'/userDetail'}" th:object="${signupForm}">
 						<table class="table table-bordered table-hover">
 							<tr>
 								<!-- ユーザーID入力不可 -->
@@ -67,7 +67,7 @@
 								<td>
 									<div class="form-group">
 										<div th:each="item : ${radioMarriage}">
-											<input type="radio" name="radiomarriage" th:value="${item.value}" th:text="${item.key}" th:field="*{marriage}">
+											<input type="radio" name="radioMarriage" th:value="${item.value}" th:text="${item.key}" th:field="*{marriage}">
 											<span class="text-danger" th:if="${#fields.hasErrors('marriage')}" th:errors="*{marriage}">marriage error</span>
 										</div>
 									</div>
