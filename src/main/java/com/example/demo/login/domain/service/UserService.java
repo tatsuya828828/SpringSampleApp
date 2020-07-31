@@ -11,14 +11,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.login.domain.model.User;
 import com.example.demo.login.domain.repository.UserDao;
 
+@Transactional
+/*
+ *
+ */
 @Service
 public class UserService {
 	@Autowired
-	@Qualifier("UserDaoJdbcImpl4")
+	@Qualifier("UserDaoJdbcImpl")
 	/* @Autowiredと一緒に@Qualifierアノテーションを使用すると、どのBeanを使用するか指定することができる
 	 * UserDaoインターフェースを継承したクラスが1つだけであればSpringが自動的にBeanを探してくれるため、@Qualifierはつける必要がない
 	 * ただし、今回のようにインターフェースを継承したクラスが2つある場合は、@Qualifierをつけなければならない
