@@ -17,8 +17,9 @@ import com.example.demo.login.domain.model.User;
 import com.example.demo.login.domain.repository.UserDao;
 
 @Transactional
-/*
- *
+/* トランザクションを使うためには、クラスに@Transactionalアノテーションをつける
+ * なお、引数をつけることでトランザクションのレベルを設定することができる
+ * 一般的には、ビジネスロジックを担当するサービスクラスに@Tracsactinalアノテーションをつける
  */
 @Service
 public class UserService {
